@@ -1,4 +1,4 @@
-import { createStore, createReducer } from "@reduxjs/toolkit";
+import { createStore } from "@reduxjs/toolkit";
 import rootReducer from "./modules";
 
 // **** 리덕스 개발자도구 적용
