@@ -3,8 +3,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
+import { get35day } from "../store/modules/get35Day";
 
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const Calendar = () => {
   const date = [];
@@ -12,18 +13,19 @@ const Calendar = () => {
     date.push(i);
   }
   const selectedDate = useSelector((state: RootState) => state.calendar.date);
+  const days = get35day(selectedDate);
   return (
     <>
       <Title>
         <div>{format(selectedDate, "MMMM, yyyy")}</div>
       </Title>
       <Weekend>
-        {days.map((day, idx) => (
+        {DAYS.map((day, idx) => (
           <div key={idx}>{day}</div>
         ))}
       </Weekend>
       <Container>
-        {date.map((item, idx) => (
+        {days.map((item, idx) => (
           <div className="item" key={idx}>
             {item}
           </div>
