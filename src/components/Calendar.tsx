@@ -1,17 +1,21 @@
+import format from "date-fns/format";
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../store/modules";
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const Calendar = () => {
   const date = [];
   for (let i = 1; i < 36; i++) {
     date.push(i);
   }
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const selectedDate = useSelector((state: RootState) => state.calendar.date);
   return (
     <>
       <Title>
-        <div>December</div>
-        <div>, 2020</div>
+        <div>{format(selectedDate, "MMMM, yyyy")}</div>
       </Title>
       <Weekend>
         {days.map((day, idx) => (
