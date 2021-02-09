@@ -1,15 +1,10 @@
 import { add, getDay, getDaysInMonth, sub } from "date-fns";
 
-export const get35day = (today: Date) => {
-  let prev_days: Array<number> = [];
-  let current_days: Array<number> = [];
-  let next_days: Array<number> = [];
-
+export const getDays = (today: Date) => {
   let result: Array<Object> = [];
 
   const start_date = getDay(new Date(today.getFullYear(), today.getMonth(), 1));
-
-  let prev_allDays = getDaysInMonth(sub(today, { months: 1 })) - start_date + 1; //저번 달의 모든 날의 수
+  let prev_allDays = getDaysInMonth(sub(today, { months: 1 })) - start_date + 1; //화면에 보여줄 저번달의 첫날
 
   for (let i = 0; i < start_date; i++) {
     let prev = sub(today, { months: 1 });
@@ -20,7 +15,6 @@ export const get35day = (today: Date) => {
       date,
     };
     result.push(temp);
-    prev_days.push(prev_allDays);
     prev_allDays++;
   }
 
@@ -31,10 +25,9 @@ export const get35day = (today: Date) => {
       date,
     };
     result.push(temp);
-    current_days.push(i);
   }
 
-  let next_month_count = 35 - prev_days.length - current_days.length;
+  let next_month_count = 35 - result.length;
   for (let i = 1; i <= next_month_count; i++) {
     let next = add(today, { months: 1 });
     let date = new Date(next.getFullYear(), next.getMonth(), i);
@@ -43,7 +36,6 @@ export const get35day = (today: Date) => {
       date,
     };
     result.push(temp);
-    next_days.push(i);
   }
 
   if (result.length > 35) {
@@ -56,7 +48,6 @@ export const get35day = (today: Date) => {
         date,
       };
       result.push(temp);
-      next_days.push(i);
     }
   }
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
 import { nextMonth, thisMonth, prevMonth } from "../store/modules/calendar";
-import { get35day } from "../store/modules/get35Day";
+import { getDays } from "../store/modules/getDays";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -22,7 +22,7 @@ const Calendar = () => {
   const goNextMonth = () => {
     dispatch(nextMonth());
   };
-  const days: Array<any> = get35day(selectedDate);
+  const days: Array<any> = getDays(selectedDate);
   console.log(selectedDate);
   console.log(days);
   return (
