@@ -1,24 +1,32 @@
 import format from "date-fns/format";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
+import { nextMonth, prevMonth } from "../store/modules/calendar";
 import { get35day } from "../store/modules/get35Day";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const Calendar = () => {
-  const date = [];
-  for (let i = 1; i < 36; i++) {
-    date.push(i);
-  }
-  const selectedDate = useSelector((state: RootState) => state.calendar.date);
+  const selectedDate = useSelector(
+    (state: RootState) => state.calendar.selectedDate
+  );
+  const dispatch = useDispatch();
+  const goPrevMonth = () => {
+    dispatch(prevMonth());
+  };
+  const goNextMonth = () => {
+    dispatch(nextMonth());
+  };
   const days = get35day(selectedDate);
   return (
     <>
       <Title>
         <div>{format(selectedDate, "MMMM, yyyy")}</div>
       </Title>
+      <button onClick={goPrevMonth}>{"<"}</button>
+      <button onClick={goNextMonth}>{">"}</button>
       <Weekend>
         {DAYS.map((day, idx) => (
           <div key={idx}>{day}</div>
