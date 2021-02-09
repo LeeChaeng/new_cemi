@@ -19,7 +19,9 @@ const Calendar = () => {
   const goNextMonth = () => {
     dispatch(nextMonth());
   };
-  const days = get35day(selectedDate);
+  const days: Array<any> = get35day(selectedDate);
+  console.log(selectedDate);
+  console.log(days);
   return (
     <>
       <Title>
@@ -33,9 +35,9 @@ const Calendar = () => {
         ))}
       </Weekend>
       <Container>
-        {days.map((item, idx) => (
-          <div className="item" key={idx}>
-            {item}
+        {days.map((item) => (
+          <div className="item" key={item.id}>
+            {item.date.getDate()}
           </div>
         ))}
       </Container>
