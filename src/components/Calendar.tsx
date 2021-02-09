@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
-import { nextMonth, prevMonth } from "../store/modules/calendar";
+import { nextMonth, thisMonth, prevMonth } from "../store/modules/calendar";
 import { get35day } from "../store/modules/get35Day";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -15,6 +15,9 @@ const Calendar = () => {
   const dispatch = useDispatch();
   const goPrevMonth = () => {
     dispatch(prevMonth());
+  };
+  const goToday = () => {
+    dispatch(thisMonth());
   };
   const goNextMonth = () => {
     dispatch(nextMonth());
@@ -28,6 +31,7 @@ const Calendar = () => {
         <div>{format(selectedDate, "MMMM, yyyy")}</div>
       </Title>
       <button onClick={goPrevMonth}>{"<"}</button>
+      <button onClick={goToday}>{"today"}</button>
       <button onClick={goNextMonth}>{">"}</button>
       <Weekend>
         {DAYS.map((day, idx) => (
