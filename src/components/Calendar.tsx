@@ -3,7 +3,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
-import { nextMonth, thisMonth, prevMonth } from "../store/modules/calendar";
+import {
+  nextMonth,
+  thisMonth,
+  prevMonth,
+  changeDate,
+} from "../store/modules/calendar";
 import { getDays } from "../store/modules/getDays";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -23,8 +28,23 @@ const Calendar = () => {
     dispatch(nextMonth());
   };
   const days: Array<any> = getDays(selectedDate);
-  console.log(selectedDate);
-  console.log(days);
+
+  const onDateClick = (event: any) => {
+    let {
+      target: { id },
+    } = event;
+    console.log(id);
+    let current = document.getElementById(selectedDate.getTime().toString());
+    if (current) {
+      current.className = "item";
+    }
+    dispatch(changeDate(parseInt(id)));
+    let select = document.getElementById(id);
+    if (select) {
+      select.className = "item select";
+    }
+  };
+
   return (
     <>
       <Title>
@@ -40,7 +60,12 @@ const Calendar = () => {
       </Weekend>
       <Container>
         {days.map((item) => (
-          <div className="item" key={item.id}>
+          <div
+            className="item"
+            key={item.id}
+            id={item.id}
+            onClick={onDateClick}
+          >
             {item.date.getDate()}
           </div>
         ))}
@@ -60,6 +85,9 @@ const Container = styled.div`
   grid-template-rows: repeat(5, minmax(100px, auto));
   & > .item {
     border: solid;
+  }
+  & > .select {
+    color: red;
   }
 `;
 
