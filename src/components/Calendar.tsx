@@ -33,7 +33,6 @@ const Calendar = () => {
     let {
       target: { id },
     } = event;
-    console.log(id);
     let current = document.getElementById(selectedDate.getTime().toString());
     if (current) {
       current.className = "item";
@@ -46,7 +45,7 @@ const Calendar = () => {
   };
 
   return (
-    <>
+    <Box>
       <Title>
         <div className="title">{format(selectedDate, "MMMM, yyyy")}</div>
         <Button>
@@ -60,33 +59,37 @@ const Calendar = () => {
           <div key={idx}>{day}</div>
         ))}
       </Weekend>
-      <Container>
-        {days.map((item) => (
-          <div
-            className="item"
-            key={item.id}
-            id={item.id}
-            onClick={onDateClick}
-          >
-            {item.date.getDate()}
-          </div>
-        ))}
-      </Container>
-    </>
+      <div>
+        <Container>
+          {days.map((item) => (
+            <div
+              className="item"
+              key={item.id}
+              id={item.id}
+              onClick={onDateClick}
+            >
+              {item.date.getDate()}
+            </div>
+          ))}
+        </Container>
+      </div>
+    </Box>
   );
 };
 
+const Box = styled.div`
+  flex: 3;
+`;
+
 const Title = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   text-align: left;
-  padding-left: 20px;
-  padding-bottom: 30px;
-  /* border: solid; */
+  padding: 32px;
   & > .title {
     font-size: 23px;
-    padding-bottom: 15px;
     font-family: "Bold";
     color: #f2702f;
   }
@@ -106,10 +109,12 @@ const Container = styled.div`
   grid-auto-rows: minmax(100px, auto);
   border-left: solid 1px #f0f1f1;
   border-bottom: solid 2px #f0f1f1;
-  border-right: solid 1px #f0f1f1;
   & > .item {
     border: solid 1px #f0f1f1;
     padding-top: 5px;
+  }
+  & > .item:nth-child(7n) {
+    border-right: none;
   }
   & > .select {
     color: #f2702f;
@@ -128,6 +133,7 @@ const Weekend = styled.div`
   }
   border: solid 2px #f0f1f1;
   border-bottom: solid 1px #f0f1f1;
+  border-right: none;
 `;
 
 export default Calendar;
