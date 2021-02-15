@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { switchModal } from "../store/modules/modal";
 
 const TodoList = () => {
+  const dispatch = useDispatch();
+  const showModal = () => {
+    dispatch(switchModal());
+  };
   return (
     <Container>
       <Title>
@@ -9,7 +15,9 @@ const TodoList = () => {
           <span className="day">Friday, </span>
           <span className="week"> 4th</span>
         </Info>
-        <button className="add">+</button>
+        <button className="add" onClick={showModal}>
+          +
+        </button>
       </Title>
       <Button></Button>
     </Container>
