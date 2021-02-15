@@ -1,3 +1,4 @@
+import { isSameDay } from "date-fns";
 import format from "date-fns/format";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,21 +28,13 @@ const Calendar = () => {
   const goNextMonth = () => {
     dispatch(nextMonth());
   };
-  const days: Array<any> = getDays(selectedDate);
+  const days = getDays(selectedDate);
 
-  const onDateClick = (event: any) => {
-    let {
-      target: { id },
+  const onDateClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const {
+      currentTarget: { id },
     } = event;
-    let current = document.getElementById(selectedDate.getTime().toString());
-    if (current) {
-      current.className = "item";
-    }
     dispatch(changeDate(parseInt(id)));
-    let select = document.getElementById(id);
-    if (select) {
-      select.className = "item select";
-    }
   };
 
   return (
@@ -62,14 +55,14 @@ const Calendar = () => {
       <div>
         <Container>
           {days.map((item) => (
-            <div
-              className="item"
+            <Day
               key={item.id}
-              id={item.id}
+              id={item.id.toString()}
               onClick={onDateClick}
+              selected={isSameDay(selectedDate, item.date)}
             >
               {item.date.getDate()}
-            </div>
+            </Day>
           ))}
         </Container>
       </div>
@@ -109,16 +102,15 @@ const Container = styled.div`
   grid-auto-rows: minmax(100px, auto);
   border-left: solid 1px #f0f1f1;
   border-bottom: solid 2px #f0f1f1;
-  & > .item {
-    border: solid 1px #f0f1f1;
-    padding-top: 5px;
-  }
-  & > .item:nth-child(7n) {
+`;
+
+const Day = styled.div<{ selected: boolean }>`
+  border: solid 1px #f0f1f1;
+  padding-top: 5px;
+  &:nth-child(7n) {
     border-right: none;
   }
-  & > .select {
-    color: #f2702f;
-  }
+  color: ${(props) => props.selected && "#f2702f"};
 `;
 
 const Weekend = styled.div`

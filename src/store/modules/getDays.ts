@@ -1,7 +1,12 @@
 import { add, getDay, getDaysInMonth, sub } from "date-fns";
 
+type day = {
+  id: number;
+  date: Date;
+};
+
 export const getDays = (today: Date) => {
-  let result: Array<Object> = [];
+  let result: Array<day> = [];
 
   const start_date = getDay(new Date(today.getFullYear(), today.getMonth(), 1));
   let prev_allDays = getDaysInMonth(sub(today, { months: 1 })) - start_date + 1; //화면에 보여줄 저번달의 첫날

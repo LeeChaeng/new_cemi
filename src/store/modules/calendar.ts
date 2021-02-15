@@ -24,16 +24,16 @@ export const calendar = (state = initialState, action: CalendarAction) => {
   switch (action.type) {
     case PREV:
       console.log("action prev");
-      return { selectedDate: sub(state.selectedDate, { months: 1 }) };
+      return { ...state, selectedDate: sub(state.selectedDate, { months: 1 }) };
     case TODAY:
       console.log("today");
-      return { selectedDate: new Date() };
+      return { ...state, selectedDate: new Date() };
     case NEXT:
       console.log("action next");
-      return { selectedDate: add(state.selectedDate, { months: 1 }) };
+      return { ...state, selectedDate: add(state.selectedDate, { months: 1 }) };
     case CHANGE:
       console.log("change state");
-      return { selectedDate: new Date(action.id) };
+      return { ...state, selectedDate: new Date(action.id) };
     default:
       return state;
   }
