@@ -18,22 +18,26 @@ type CalendarAction =
 
 const initialState = {
   selectedDate: new Date(),
+  visibleDate: new Date(),
 };
 
 export const calendar = (state = initialState, action: CalendarAction) => {
   switch (action.type) {
     case PREV:
       console.log("action prev");
-      return { ...state, selectedDate: sub(state.selectedDate, { months: 1 }) };
+      return { ...state, visibleDate: sub(state.visibleDate, { months: 1 }) };
     case TODAY:
       console.log("today");
-      return { ...state, selectedDate: new Date() };
+      return { visibleDate: new Date(), selectedDate: new Date() };
     case NEXT:
       console.log("action next");
-      return { ...state, selectedDate: add(state.selectedDate, { months: 1 }) };
+      return { ...state, visibleDate: add(state.visibleDate, { months: 1 }) };
     case CHANGE:
       console.log("change state");
-      return { ...state, selectedDate: new Date(action.id) };
+      return {
+        visibleDate: new Date(action.id),
+        selectedDate: new Date(action.id),
+      };
     default:
       return state;
   }

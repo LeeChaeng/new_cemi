@@ -18,6 +18,9 @@ const Calendar = () => {
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
+  const visibleDate = useSelector(
+    (state: RootState) => state.calendar.visibleDate
+  );
   const dispatch = useDispatch();
   const goPrevMonth = () => {
     dispatch(prevMonth());
@@ -28,7 +31,7 @@ const Calendar = () => {
   const goNextMonth = () => {
     dispatch(nextMonth());
   };
-  const days = getDays(selectedDate);
+  const days = getDays(visibleDate);
 
   const onDateClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const {
@@ -40,7 +43,7 @@ const Calendar = () => {
   return (
     <Box>
       <Title>
-        <div className="title">{format(selectedDate, "MMMM, yyyy")}</div>
+        <div className="title">{format(visibleDate, "MMMM, yyyy")}</div>
         <Button>
           <button onClick={goPrevMonth}>{"<"}</button>
           <button onClick={goToday}>{"today"}</button>

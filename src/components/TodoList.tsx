@@ -1,19 +1,37 @@
+import { getDay, getWeekOfMonth } from "date-fns";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../store/modules";
 import { switchModal } from "../store/modules/modal";
+
+const DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thurseday",
+  "Friday",
+  "Saturday",
+];
+const WEEKS = ["1st", "2nd", "3rd", "4th", "5th"];
 
 const TodoList = () => {
   const dispatch = useDispatch();
   const showModal = () => {
     dispatch(switchModal());
   };
+  const selectedDate = useSelector(
+    (state: RootState) => state.calendar.selectedDate
+  );
   return (
     <Container>
       <Title>
         <Info>
-          <span className="day">Friday, </span>
-          <span className="week"> 4th</span>
+          <span className="day">{DAYS[getDay(selectedDate)]}, </span>
+          <span className="week">
+            {WEEKS[getWeekOfMonth(selectedDate) - 1]}
+          </span>
         </Info>
         <button className="add" onClick={showModal}>
           +
