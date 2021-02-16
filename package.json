@@ -22,6 +22,7 @@
     "redux": "^4.0.5",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -50,5 +51,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://leechaeng.github.io/new_cemi"
+  "homepage": "https://leechaeng.github.io/new_cemi",
+  "devDependencies": {
+    "@types/uuid": "^8.3.0"
+  }
 }

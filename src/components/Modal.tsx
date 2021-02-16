@@ -1,43 +1,76 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../store/modules";
 import { switchModal } from "../store/modules/modal";
+import { addTodo } from "../store/modules/todo";
+
+const HOURS = [
+  "12 AM",
+  "1 AM",
+  "2 AM",
+  "3 AM",
+  "4 AM",
+  "5 AM",
+  "6 AM",
+  "7 AM",
+  "8 AM",
+  "9 AM",
+  "10 AM",
+  "11 AM",
+  "12 PM",
+  "1 PM",
+  "2 PM",
+  "3 PM",
+  "4 PM",
+  "5 PM",
+  "6 PM",
+  "7 PM",
+  "8 PM",
+  "9 PM",
+  "10 PM",
+  "11 PM",
+];
 
 const Modal = () => {
   const [deadLine, setDeadLine] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [deadLineValue, setDeadLineValue] = useState("");
+
+  const selectedDate = useSelector(
+    (state: RootState) => state.calendar.selectedDate
+  );
   const addDeadLine = () => {
     setDeadLine(true);
+    setDeadLineValue(HOURS[0]);
   };
   const dispatch = useDispatch();
   const showModal = () => {
     dispatch(switchModal());
   };
-  const hours = [
-    "12 AM",
-    "1 AM",
-    "2 AM",
-    "3 AM",
-    "4 AM",
-    "5 AM",
-    "6 AM",
-    "7 AM",
-    "8 AM",
-    "9 AM",
-    "10 AM",
-    "11 AM",
-    "12 PM",
-    "1 PM",
-    "2 PM",
-    "3 PM",
-    "4 PM",
-    "5 PM",
-    "6 PM",
-    "7 PM",
-    "8 PM",
-    "9 PM",
-    "10 PM",
-    "11 PM",
-  ];
+
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = event;
+    setInputValue(value);
+  };
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const {
+      target: { value },
+    } = event;
+    setDeadLineValue(value);
+  };
+  const onSubmit = () => {
+    console.log(deadLineValue);
+    if (inputValue !== "") {
+      dispatch(addTodo(selectedDate.getTime(), inputValue, deadLineValue));
+    }
+    setInputValue("");
+    setDeadLineValue("");
+    dispatch(switchModal());
+  };
+
   return (
     <Container>
       <Overlay onClick={showModal}></Overlay>
@@ -45,11 +78,19 @@ const Modal = () => {
         <span className="exit" onClick={showModal}>
           X
         </span>
-        <input type="text" placeholder="Enter your to do"></input>
+        <input
+          id="todo"
+          type="text"
+          placeholder="Enter your to do"
+          onChange={onInputChange}
+          value={inputValue}
+        ></input>
         {deadLine ? (
-          <select>
-            {hours.map((hour) => (
-              <option value={hour}>{hour}</option>
+          <select id="deadline" value={deadLineValue} onChange={onSelectChange}>
+            {HOURS.map((hour, idx) => (
+              <option key={idx} value={hour}>
+                {hour}
+              </option>
             ))}
           </select>
         ) : (
@@ -58,7 +99,7 @@ const Modal = () => {
             <span>Add deadline</span>
           </DeadLine>
         )}
-        <Submit>Submit</Submit>
+        <Submit onClick={onSubmit}>Submit</Submit>
       </Content>
     </Container>
   );

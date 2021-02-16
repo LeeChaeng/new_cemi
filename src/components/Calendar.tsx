@@ -10,7 +10,7 @@ import {
   prevMonth,
   changeDate,
 } from "../store/modules/calendar";
-import { getDays } from "../store/modules/getDays";
+import { getDays } from "../static/getDays";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -75,6 +75,7 @@ const Calendar = () => {
 
 const Box = styled.div`
   flex: 3;
+  text-align: center;
 `;
 
 const Title = styled.div`
