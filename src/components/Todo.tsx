@@ -1,19 +1,39 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { toggleTodo } from "../store/modules/todo";
 
 type TodoProps = {
+  id: string;
   text: string;
   deadline: string;
+  done: boolean;
 };
 
-const Todo = ({ text, deadline }: TodoProps) => {
+const Todo = ({ id, text, deadline, done }: TodoProps) => {
+  const dispatch = useDispatch();
+  const todoToggle = () => {
+    dispatch(toggleTodo(id));
+  };
   return (
-    <Container>
-      <Color />
-      <div>
-        <span>{text}</span>
-        <span>{deadline}</span>
-      </div>
+    <Container onClick={todoToggle}>
+      {done ? (
+        <>
+          <Color color="#00af91" />
+          <div>
+            <span className="done">{text}</span>
+            <span>{deadline}</span>
+          </div>
+        </>
+      ) : (
+        <>
+          <Color color="#007965" />
+          <div>
+            <span>{text}</span>
+            <span>{deadline}</span>
+          </div>
+        </>
+      )}
     </Container>
   );
 };
@@ -27,11 +47,15 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
+  & > div > .done {
+    font-style: italic;
+    text-decoration: line-through;
+  }
 `;
 
-const Color = styled.span`
+const Color = styled.span<{ color: string }>`
   display: block;
-  background-color: red;
+  background-color: ${(props) => props.color};
   width: 14px;
   height: 14px;
   border-radius: 50%;

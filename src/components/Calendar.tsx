@@ -21,6 +21,7 @@ const Calendar = () => {
   const visibleDate = useSelector(
     (state: RootState) => state.calendar.visibleDate
   );
+  const todoList = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
   const goPrevMonth = () => {
     dispatch(prevMonth());
@@ -65,6 +66,26 @@ const Calendar = () => {
               selected={isSameDay(selectedDate, item.date)}
             >
               {item.date.getDate()}
+              <div className="color_container">
+                {todoList.find(
+                  (todo) =>
+                    !todo.done &&
+                    isSameDay(new Date(todo.dateTime), new Date(item.id))
+                ) ? (
+                  <Color color="#007965" />
+                ) : (
+                  ""
+                )}
+                {todoList.find(
+                  (todo) =>
+                    todo.done &&
+                    isSameDay(new Date(todo.dateTime), new Date(item.id))
+                ) ? (
+                  <Color color="#00AF91" />
+                ) : (
+                  ""
+                )}
+              </div>
             </Day>
           ))}
         </Container>
@@ -111,10 +132,25 @@ const Container = styled.div`
 const Day = styled.div<{ selected: boolean }>`
   border: solid 1px #f0f1f1;
   padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &:nth-child(7n) {
     border-right: none;
   }
   color: ${(props) => props.selected && "#f2702f"};
+  & > .color_container {
+    display: flex;
+    margin: 10px;
+  }
+`;
+
+const Color = styled.div<{ color: string }>`
+  background-color: ${(props) => props.color};
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 7px;
 `;
 
 const Weekend = styled.div`

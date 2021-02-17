@@ -62,7 +62,6 @@ const Modal = () => {
     setDeadLineValue(value);
   };
   const onSubmit = () => {
-    console.log(deadLineValue);
     if (inputValue !== "") {
       dispatch(addTodo(selectedDate.getTime(), inputValue, deadLineValue));
     }

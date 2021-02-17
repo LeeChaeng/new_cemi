@@ -43,7 +43,13 @@ const TodoList = () => {
       </Title>
       <Content>
         {todoState.map((todo) => (
-          <Todo key={todo.id} text={todo.text} deadline={todo.deadline}></Todo>
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            text={todo.text}
+            deadline={todo.deadline}
+            done={todo.done}
+          ></Todo>
         ))}
       </Content>
     </Container>
