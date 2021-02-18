@@ -90,7 +90,7 @@ const Info = styled.div`
 `;
 
 const Content = styled.div`
-  height: 100%;
+  height: 100vh;
   overflow-y: scroll;
 `;
 

@@ -22,7 +22,7 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
           <Color color="#00af91" />
           <div>
             <span className="done">{text}</span>
-            <span>{deadline}</span>
+            <span className="done">{deadline}</span>
           </div>
         </>
       ) : (
@@ -46,10 +46,12 @@ const Container = styled.div`
   & > div {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
   }
   & > div > .done {
     font-style: italic;
     text-decoration: line-through;
+    color: lightgray;
   }
 `;
 
