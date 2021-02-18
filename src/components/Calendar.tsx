@@ -11,6 +11,7 @@ import {
   changeDate,
 } from "../store/modules/calendar";
 import { getDays } from "../static/getDays";
+import { TodoType } from "../static/getTodos";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -68,7 +69,7 @@ const Calendar = () => {
               {item.date.getDate()}
               <div className="color_container">
                 {todoList.find(
-                  (todo) =>
+                  (todo: TodoType) =>
                     !todo.done &&
                     isSameDay(new Date(todo.dateTime), new Date(item.id))
                 ) ? (
@@ -77,7 +78,7 @@ const Calendar = () => {
                   ""
                 )}
                 {todoList.find(
-                  (todo) =>
+                  (todo: TodoType) =>
                     todo.done &&
                     isSameDay(new Date(todo.dateTime), new Date(item.id))
                 ) ? (

@@ -2,6 +2,7 @@ import { getDay, getWeekOfMonth, isSameDay } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { TodoType } from "../static/getTodos";
 import { RootState } from "../store/modules";
 import { switchModal } from "../store/modules/modal";
 import Todo from "./Todo";
@@ -27,7 +28,7 @@ const TodoList = () => {
   );
   const todoState = useSelector(
     (state: RootState) => state.todo
-  ).filter((item) => isSameDay(item.dateTime, selectedDate));
+  ).filter((item: TodoType) => isSameDay(item.dateTime, selectedDate));
   return (
     <Container>
       <Title>
@@ -42,7 +43,7 @@ const TodoList = () => {
         </button>
       </Title>
       <Content>
-        {todoState.map((todo) => (
+        {todoState.map((todo: TodoType) => (
           <Todo
             key={todo.id}
             id={todo.id}
