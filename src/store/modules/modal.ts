@@ -11,7 +11,6 @@ type ModalAction = ReturnType<typeof switchModal>;
 export const modal = (state = initialState, action: ModalAction) => {
   switch (action.type) {
     case ONOFF:
-      console.log("switching modal");
       return { addModalOn: !state.addModalOn };
     default:
       return state;

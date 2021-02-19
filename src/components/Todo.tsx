@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { toggleTodo } from "../store/modules/todo";
+import { delTodo, toggleTodo } from "../store/modules/todo";
+
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type TodoProps = {
   id: string;
@@ -15,40 +18,49 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
   const todoToggle = () => {
     dispatch(toggleTodo(id));
   };
+  const deleteTodo = () => {
+    dispatch(delTodo(id));
+  };
   return (
-    <Container onClick={todoToggle}>
+    <Container>
       {done ? (
-        <>
+        <div onClick={todoToggle}>
           <Color color="#00af91" />
           <div>
             <span className="done">{text}</span>
             <span className="done">{deadline}</span>
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div onClick={todoToggle}>
           <Color color="#007965" />
           <div>
             <span>{text}</span>
             <span>{deadline}</span>
           </div>
-        </>
+        </div>
       )}
+      <FontAwesomeIcon
+        icon={faTrash}
+        color="lightgray"
+        size="sm"
+        onClick={deleteTodo}
+      />
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
   padding: 24px;
   border-bottom: 2px solid #f0f1f1;
   & > div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     cursor: pointer;
   }
-  & > div > .done {
+  & > div > div > .done {
     font-style: italic;
     text-decoration: line-through;
     color: lightgray;

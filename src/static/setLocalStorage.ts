@@ -25,3 +25,9 @@ export const toggleChange = (id: string) => {
   );
   localStorage.setItem("new_cemi", JSON.stringify(finalValue));
 };
+
+export const deleteLocalStorage = (id: string) => {
+  const item = JSON.parse(localStorage.getItem("new_cemi") || "");
+  let finalValue = item.filter((value: TodoType) => value.id !== id);
+  localStorage.setItem("new_cemi", JSON.stringify(finalValue));
+};

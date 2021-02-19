@@ -40,7 +40,6 @@ const Modal = () => {
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
-  const todoList = useSelector((state: RootState) => state.todo);
 
   const addDeadLine = () => {
     setDeadLine(true);
