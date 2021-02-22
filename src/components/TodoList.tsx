@@ -59,7 +59,7 @@ const TodoList = () => {
 
 const Container = styled.div`
   flex: 1;
-  height: 100vh;
+  height: 78vh;
   border-left: solid 3px #f0f1f1;
 `;
 
@@ -91,7 +91,6 @@ const Info = styled.div`
 `;
 
 const Content = styled.div`
-  height: 100vh;
   overflow-y: scroll;
 `;
 

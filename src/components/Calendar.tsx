@@ -23,6 +23,7 @@ const Calendar = () => {
     (state: RootState) => state.calendar.visibleDate
   );
   const todoList = useSelector((state: RootState) => state.todo);
+
   const dispatch = useDispatch();
   const goPrevMonth = () => {
     dispatch(prevMonth());
@@ -33,6 +34,7 @@ const Calendar = () => {
   const goNextMonth = () => {
     dispatch(nextMonth());
   };
+
   const days = getDays(visibleDate);
 
   const onDateClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -45,7 +47,10 @@ const Calendar = () => {
   return (
     <Box>
       <Title>
-        <div className="title">{format(visibleDate, "MMMM, yyyy")}</div>
+        <div className="title">
+          <span>{format(visibleDate, "yyyy")}</span>
+          <span className="title__month">{format(visibleDate, "MMMM")}</span>
+        </div>
         <Button>
           <button onClick={goPrevMonth}>{"<"}</button>
           <button onClick={goToday}>{"today"}</button>
@@ -108,9 +113,14 @@ const Title = styled.div`
   text-align: left;
   padding: 32px;
   & > .title {
-    font-size: 23px;
-    font-family: "Bold";
-    color: #f2702f;
+    font-size: 30px;
+    font-family: "SCDream_bold";
+    color: #3e4496;
+    & > .title__month {
+      font-size: 40px;
+      font-family: "SCDream_bold";
+      margin-left: 10px;
+    }
   }
 `;
 const Button = styled.div`
@@ -123,11 +133,9 @@ const Button = styled.div`
 
 const Container = styled.div`
   display: grid;
-  height: 500px;
+  height: 600px;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: minmax(100px, auto);
-  border-left: solid 1px #f0f1f1;
-  border-bottom: solid 2px #f0f1f1;
+  grid-auto-rows: minmax(80px, auto);
 `;
 
 const Day = styled.div<{ selected: boolean }>`
@@ -139,6 +147,11 @@ const Day = styled.div<{ selected: boolean }>`
   &:nth-child(7n) {
     border-right: none;
   }
+  &:nth-last-child(n) {
+    border-bottom: none;
+    border-left: none;
+  }
+
   color: ${(props) => props.selected && "#f2702f"};
   & > .color_container {
     display: flex;
