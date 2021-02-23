@@ -53,7 +53,7 @@ const Calendar = () => {
         </div>
         <Button>
           <button onClick={goPrevMonth}>{"<"}</button>
-          <button onClick={goToday}>{"today"}</button>
+          <button onClick={goToday}>{"TODAY"}</button>
           <button onClick={goNextMonth}>{">"}</button>
         </Button>
       </Title>
@@ -78,7 +78,7 @@ const Calendar = () => {
                     !todo.done &&
                     isSameDay(new Date(todo.dateTime), new Date(item.id))
                 ) ? (
-                  <Color color="#007965" />
+                  <Color color="#e3535a" />
                 ) : (
                   ""
                 )}
@@ -87,7 +87,7 @@ const Calendar = () => {
                     todo.done &&
                     isSameDay(new Date(todo.dateTime), new Date(item.id))
                 ) ? (
-                  <Color color="#00AF91" />
+                  <Color color="#3e4496" />
                 ) : (
                   ""
                 )}
@@ -124,10 +124,13 @@ const Title = styled.div`
   }
 `;
 const Button = styled.div`
-  button {
+  font-family: "SCDream_light";
+  & > button {
     border-radius: 50px;
     border: none;
     margin-right: 5px;
+    cursor: pointer;
+    outline: none;
   }
 `;
 
@@ -144,15 +147,25 @@ const Day = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: background-color 0.2s;
+  &:hover {
+    cursor: pointer;
+    background-color: #f0f1f1;
+  }
   &:nth-child(7n) {
     border-right: none;
+  }
+  &:nth-last-child(7) {
+    border-bottom-left-radius: 40px;
   }
   &:nth-last-child(n) {
     border-bottom: none;
     border-left: none;
   }
 
-  color: ${(props) => props.selected && "#f2702f"};
+  color: ${(props) => props.selected && "#e3535a"};
+  font-family: ${(props) => props.selected && "SCDream_bold"};
+
   & > .color_container {
     display: flex;
     margin: 10px;

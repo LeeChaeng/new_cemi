@@ -21,10 +21,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   background-color: white;
-  margin: 0px 100px;
+  margin: 0px 50px;
   border-radius: 40px 0px 40px 40px;
   border: none;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
-  overflow: auto;
+  min-width: 700px;
+  width: calc(100vw - 120px);
 `;
 export default Home;

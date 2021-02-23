@@ -81,11 +81,13 @@ const Title = styled.div`
 const Info = styled.div`
   display: flex;
   align-items: flex-end;
+  font-family: "SCDream_bold";
+  color: #e3535a;
   & > .day {
-    font-size: 23px;
+    font-size: 39.5px;
   }
   & > .week {
-    font-size: 18px;
+    font-size: 23px;
     margin-left: 10px;
   }
 `;

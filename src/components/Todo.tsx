@@ -18,14 +18,15 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
   const todoToggle = () => {
     dispatch(toggleTodo(id));
   };
-  const deleteTodo = () => {
+  const deleteTodo = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    event.stopPropagation(); //prevent eventBubbling
     dispatch(delTodo(id));
   };
   return (
-    <Container>
+    <Container onClick={todoToggle}>
       {done ? (
-        <div onClick={todoToggle}>
-          <Color color="#00af91" />
+        <div>
+          <Color color="#3e4496" />
           <div>
             <span className="done">{text}</span>
             <span className="done">{deadline}</span>
@@ -33,7 +34,7 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
         </div>
       ) : (
         <div onClick={todoToggle}>
-          <Color color="#007965" />
+          <Color color="#e3535a" />
           <div>
             <span>{text}</span>
             <span>{deadline}</span>
@@ -55,6 +56,11 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 24px;
   border-bottom: 2px solid #f0f1f1;
+  transition: background-color 0.2s;
+  &:hover {
+    cursor: pointer;
+    background-color: #f0f1f1;
+  }
   & > div {
     display: flex;
     flex-direction: row;
