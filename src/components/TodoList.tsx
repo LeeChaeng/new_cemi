@@ -50,6 +50,7 @@ const TodoList = () => {
             text={todo.text}
             deadline={todo.deadline}
             done={todo.done}
+            dateTime={todo.dateTime}
           ></Todo>
         ))}
       </Content>

@@ -1,19 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { delTodo, toggleTodo } from "../store/modules/todo";
 
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { switchModal, targetTodo } from "../store/modules/modal";
 
 type TodoProps = {
   id: string;
   text: string;
   deadline: string;
   done: boolean;
+  dateTime: number;
 };
 
-const Todo = ({ id, text, deadline, done }: TodoProps) => {
+const Todo = ({ id, text, deadline, done, dateTime }: TodoProps) => {
   const dispatch = useDispatch();
   const todoToggle = () => {
     dispatch(toggleTodo(id));
@@ -21,6 +23,10 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
   const deleteTodo = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation(); //prevent eventBubbling
     dispatch(delTodo(id));
+  };
+  const goUpdate = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    event.stopPropagation();
+    dispatch(targetTodo(id, dateTime, text, deadline));
   };
   return (
     <Container onClick={todoToggle}>
@@ -41,12 +47,20 @@ const Todo = ({ id, text, deadline, done }: TodoProps) => {
           </div>
         </div>
       )}
-      <FontAwesomeIcon
-        icon={faTrash}
-        color="lightgray"
-        size="sm"
-        onClick={deleteTodo}
-      />
+      <Button>
+        <FontAwesomeIcon
+          icon={faPen}
+          color="lightgray"
+          size="sm"
+          onClick={goUpdate}
+        />
+        <FontAwesomeIcon
+          icon={faTrash}
+          color="lightgray"
+          size="sm"
+          onClick={deleteTodo}
+        />
+      </Button>
     </Container>
   );
 };
@@ -81,6 +95,13 @@ const Color = styled.span<{ color: string }>`
   border-radius: 50%;
   margin-right: 10px;
   margin-top: 4px;
+`;
+
+const Button = styled.div`
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export default Todo;

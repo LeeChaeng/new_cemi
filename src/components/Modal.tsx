@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
-import { switchModal } from "../store/modules/modal";
-import { addTodo } from "../store/modules/todo";
+import { clearTarget, switchModal } from "../store/modules/modal";
+import { addTodo, updateTodo } from "../store/modules/todo";
 
 const HOURS = [
   "12 AM",
@@ -33,13 +33,18 @@ const HOURS = [
 ];
 
 const Modal = () => {
-  const [deadLine, setDeadLine] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [deadLineValue, setDeadLineValue] = useState("");
-
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
+  const targetValue = useSelector((state: RootState) => state.modal.todo);
+
+  const [deadLine, setDeadLine] = useState(
+    targetValue.deadline === "" ? false : true
+  );
+  const [inputValue, setInputValue] = useState(
+    targetValue.text === "" ? "" : targetValue.text
+  );
+  const [deadLineValue, setDeadLineValue] = useState(targetValue.deadline);
 
   const addDeadLine = () => {
     setDeadLine(true);
@@ -48,6 +53,7 @@ const Modal = () => {
   const dispatch = useDispatch();
   const showModal = () => {
     dispatch(switchModal());
+    dispatch(clearTarget());
   };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +67,12 @@ const Modal = () => {
       target: { value },
     } = event;
     setDeadLineValue(value);
+  };
+
+  const onUpdate = () => {
+    dispatch(updateTodo(targetValue.id, inputValue, deadLineValue));
+    dispatch(switchModal());
+    dispatch(clearTarget());
   };
   const onSubmit = () => {
     if (inputValue !== "") {
@@ -99,7 +111,11 @@ const Modal = () => {
             <span>Add deadline</span>
           </DeadLine>
         )}
-        <Submit onClick={onSubmit}>Submit</Submit>
+        {targetValue.id !== "" ? (
+          <Button onClick={onUpdate}>update</Button>
+        ) : (
+          <Button onClick={onSubmit}>Submit</Button>
+        )}
       </Content>
     </Container>
   );
@@ -163,7 +179,7 @@ const DeadLine = styled.div`
   }
 `;
 
-const Submit = styled.button`
+const Button = styled.button`
   border: none;
   padding: 5px 20px;
   outline: none;

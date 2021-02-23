@@ -1,3 +1,5 @@
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { useDebugValue } from "react";
 import { TodoType } from "./getTodos";
 
 export const addLocalStorage = (
@@ -16,6 +18,18 @@ export const addLocalStorage = (
     current.push(item);
     localStorage.setItem("new_cemi", JSON.stringify(current));
   }
+};
+
+export const updateLocalStorage = (
+  id: string,
+  text: string,
+  deadline: string
+) => {
+  const item = JSON.parse(localStorage.getItem("new_cemi") || "");
+  let finalValue = item.map((value: TodoType) =>
+    value.id === id ? { ...value, text, deadline } : value
+  );
+  localStorage.setItem("new_cemi", JSON.stringify(finalValue));
 };
 
 export const toggleChange = (id: string) => {

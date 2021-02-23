@@ -3,12 +3,14 @@ import {
   addLocalStorage,
   deleteLocalStorage,
   toggleChange,
+  updateLocalStorage,
 } from "../../static/setLocalStorage";
 import { getTodos, TodoType } from "../../static/getTodos";
 
 const ADDTODO = "todo/ADDTODO" as const;
 const DELTODO = "todo/DELTODO" as const;
 const TOGGLETODO = "todo/TOGGLETODO" as const;
+const UPDATETODO = "todo/UPDATETODO" as const;
 
 export const addTodo = (dateTime: number, text: string, deadline: string) => ({
   type: ADDTODO,
@@ -27,10 +29,18 @@ export const toggleTodo = (id: string) => ({
   id: id,
 });
 
+export const updateTodo = (id: string, text: string, deadline: string) => ({
+  type: UPDATETODO,
+  id: id,
+  text: text,
+  deadline: deadline,
+});
+
 type TodoAction =
   | ReturnType<typeof addTodo>
   | ReturnType<typeof toggleTodo>
-  | ReturnType<typeof delTodo>;
+  | ReturnType<typeof delTodo>
+  | ReturnType<typeof updateTodo>;
 
 export const todo = (state = getTodos(), action: TodoAction) => {
   switch (action.type) {
@@ -46,6 +56,13 @@ export const todo = (state = getTodos(), action: TodoAction) => {
     case DELTODO:
       deleteLocalStorage(action.id);
       return state.filter((item: TodoType) => item.id !== action.id);
+    case UPDATETODO:
+      updateLocalStorage(action.id, action.text, action.deadline);
+      return state.map((item: TodoType) =>
+        item.id === action.id
+          ? { ...item, text: action.text, deadline: action.deadline }
+          : item
+      );
     case TOGGLETODO:
       toggleChange(action.id);
       return state.map((item: TodoType) =>

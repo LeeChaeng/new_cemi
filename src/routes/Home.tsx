@@ -25,7 +25,7 @@ const Container = styled.div`
   border-radius: 40px 0px 40px 40px;
   border: none;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
-  min-width: 700px;
+  min-width: 850px;
   width: calc(100vw - 120px);
 `;
 export default Home;
