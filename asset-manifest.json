@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/new_cemi/static/css/main.21773eb0.chunk.css",
-    "main.js": "/new_cemi/static/js/main.bed57e8e.chunk.js",
-    "main.js.map": "/new_cemi/static/js/main.bed57e8e.chunk.js.map",
+    "main.js": "/new_cemi/static/js/main.dc4aa107.chunk.js",
+    "main.js.map": "/new_cemi/static/js/main.dc4aa107.chunk.js.map",
     "runtime-main.js": "/new_cemi/static/js/runtime-main.5489000c.js",
     "runtime-main.js.map": "/new_cemi/static/js/runtime-main.5489000c.js.map",
     "static/js/2.b456f9c9.chunk.js": "/new_cemi/static/js/2.b456f9c9.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.5489000c.js",
     "static/js/2.b456f9c9.chunk.js",
     "static/css/main.21773eb0.chunk.css",
-    "static/js/main.bed57e8e.chunk.js"
+    "static/js/main.dc4aa107.chunk.js"
   ]
 }
