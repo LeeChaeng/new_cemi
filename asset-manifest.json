@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/new_cemi/static/css/main.97651db6.chunk.css",
-    "main.js": "/new_cemi/static/js/main.c43f53ac.chunk.js",
-    "main.js.map": "/new_cemi/static/js/main.c43f53ac.chunk.js.map",
+    "main.css": "/new_cemi/static/css/main.21773eb0.chunk.css",
+    "main.js": "/new_cemi/static/js/main.bed57e8e.chunk.js",
+    "main.js.map": "/new_cemi/static/js/main.bed57e8e.chunk.js.map",
     "runtime-main.js": "/new_cemi/static/js/runtime-main.5489000c.js",
     "runtime-main.js.map": "/new_cemi/static/js/runtime-main.5489000c.js.map",
-    "static/js/2.64809d45.chunk.js": "/new_cemi/static/js/2.64809d45.chunk.js",
-    "static/js/2.64809d45.chunk.js.map": "/new_cemi/static/js/2.64809d45.chunk.js.map",
+    "static/js/2.b456f9c9.chunk.js": "/new_cemi/static/js/2.b456f9c9.chunk.js",
+    "static/js/2.b456f9c9.chunk.js.map": "/new_cemi/static/js/2.b456f9c9.chunk.js.map",
     "index.html": "/new_cemi/index.html",
-    "static/css/main.97651db6.chunk.css.map": "/new_cemi/static/css/main.97651db6.chunk.css.map",
-    "static/js/2.64809d45.chunk.js.LICENSE.txt": "/new_cemi/static/js/2.64809d45.chunk.js.LICENSE.txt",
+    "static/css/main.21773eb0.chunk.css.map": "/new_cemi/static/css/main.21773eb0.chunk.css.map",
+    "static/js/2.b456f9c9.chunk.js.LICENSE.txt": "/new_cemi/static/js/2.b456f9c9.chunk.js.LICENSE.txt",
     "static/media/index.css": "/new_cemi/static/media/SCDream5.ae5ee493.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.5489000c.js",
-    "static/js/2.64809d45.chunk.js",
-    "static/css/main.97651db6.chunk.css",
-    "static/js/main.c43f53ac.chunk.js"
+    "static/js/2.b456f9c9.chunk.js",
+    "static/css/main.21773eb0.chunk.css",
+    "static/js/main.bed57e8e.chunk.js"
   ]
 }
