@@ -62,7 +62,7 @@ const Calendar = () => {
           <div key={idx}>{day}</div>
         ))}
       </Weekend>
-      <div>
+      <div className="container">
         <Container>
           {days.map((item) => (
             <Day
@@ -103,6 +103,11 @@ const Calendar = () => {
 const Box = styled.div`
   flex: 3;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  & > .container {
+    flex: 1 1 0;
+  }
 `;
 
 const Title = styled.div`
@@ -136,7 +141,7 @@ const Button = styled.div`
 
 const Container = styled.div`
   display: grid;
-  height: 600px;
+  height: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: minmax(80px, auto);
 `;
