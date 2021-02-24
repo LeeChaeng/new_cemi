@@ -76,6 +76,8 @@ const Title = styled.div`
     border: 2px solid #f0f1f1;
     font-size: 20px;
     color: gray;
+    outline: none;
+    cursor: pointer;
   }
 `;
 

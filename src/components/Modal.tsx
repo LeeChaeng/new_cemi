@@ -88,7 +88,7 @@ const Modal = () => {
       <Overlay onClick={showModal}></Overlay>
       <Content>
         <span className="exit" onClick={showModal}>
-          X
+          x
         </span>
         <input
           id="todo"
@@ -133,33 +133,42 @@ const Container = styled.div`
 `;
 
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 100%;
   position: absolute;
 `;
 
 const Content = styled.div`
-  width: 25%;
+  width: 35%;
+  height: 170px;
   position: relative;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
   & > .exit {
-    margin-left: 90%;
+    margin-left: 95%;
     cursor: pointer;
+    font-size: 25px;
+    font-weight: bold;
+    color: #e3535a;
   }
   & > input {
     border: none;
-    border-bottom: 2px solid lightgray;
-    width: 60%;
-    font-size: 15px;
+    border-bottom: 1.8px solid gray;
+    width: 70%;
+    font-size: 25px;
     outline: none;
+  }
+
+  & > input::placeholder {
+    font-style: italic;
+    color: #e3535a;
   }
   & > select {
     margin: 10px 0px;
@@ -172,7 +181,8 @@ const Content = styled.div`
 const DeadLine = styled.div`
   display: flex;
   margin: 10px 0px;
-  font-size: 12px;
+  font-size: 14px;
+  font-family: "SCDream_normal";
   cursor: pointer;
   & > span {
     margin-right: 10px;
@@ -181,9 +191,15 @@ const DeadLine = styled.div`
 
 const Button = styled.button`
   border: none;
-  padding: 5px 20px;
+  padding: 2px 12px;
   outline: none;
   cursor: pointer;
+  margin-top: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: "SCDream_bold";
+  color: white;
+  background-color: #e3535a;
 `;
 
 export default Modal;
