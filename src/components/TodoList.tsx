@@ -1,5 +1,5 @@
 import { getDay, getWeekOfMonth, isSameDay } from "date-fns";
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { TodoType } from "../static/getTodos";
@@ -19,16 +19,16 @@ const DAYS = [
 const WEEKS = ["1st", "2nd", "3rd", "4th", "5th"];
 
 const TodoList = () => {
-  const dispatch = useDispatch();
-  const showModal = () => {
-    dispatch(switchModal());
-  };
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
   const todoState = useSelector(
     (state: RootState) => state.todo
   ).filter((item: TodoType) => isSameDay(item.dateTime, selectedDate));
+  const dispatch = useDispatch();
+  const showModal = useCallback(() => {
+    dispatch(switchModal());
+  }, [dispatch]);
   return (
     <Container>
       <Title>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
@@ -37,7 +37,6 @@ const Modal = () => {
     (state: RootState) => state.calendar.selectedDate
   );
   const targetValue = useSelector((state: RootState) => state.modal.todo);
-
   const [deadLine, setDeadLine] = useState(
     targetValue.deadline === "" ? false : true
   );
@@ -46,42 +45,48 @@ const Modal = () => {
   );
   const [deadLineValue, setDeadLineValue] = useState(targetValue.deadline);
 
-  const addDeadLine = () => {
+  const addDeadLine = useCallback(() => {
     setDeadLine(true);
     setDeadLineValue(HOURS[0]);
-  };
+  }, []);
+
   const dispatch = useDispatch();
-  const showModal = () => {
+  const showModal = useCallback(() => {
     dispatch(switchModal());
     dispatch(clearTarget());
-  };
+  }, [dispatch]);
+  const onInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = event;
+      setInputValue(value);
+    },
+    []
+  );
+  const onSelectChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const {
+        target: { value },
+      } = event;
+      setDeadLineValue(value);
+    },
+    []
+  );
 
-  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-    setInputValue(value);
-  };
-  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const {
-      target: { value },
-    } = event;
-    setDeadLineValue(value);
-  };
-
-  const onUpdate = () => {
+  const onUpdate = useCallback(() => {
     dispatch(updateTodo(targetValue.id, inputValue, deadLineValue));
     dispatch(switchModal());
     dispatch(clearTarget());
-  };
-  const onSubmit = () => {
+  }, [deadLineValue, dispatch, inputValue, targetValue.id]);
+  const onSubmit = useCallback(() => {
     if (inputValue !== "") {
       dispatch(addTodo(selectedDate.getTime(), inputValue, deadLineValue));
     }
     setInputValue("");
     setDeadLineValue("");
     dispatch(switchModal());
-  };
+  }, [deadLineValue, dispatch, inputValue, selectedDate]);
 
   return (
     <Container>

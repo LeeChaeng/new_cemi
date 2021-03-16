@@ -1,6 +1,6 @@
 import { isSameDay } from "date-fns";
 import format from "date-fns/format";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../store/modules";
@@ -25,24 +25,27 @@ const Calendar = () => {
   const todoList = useSelector((state: RootState) => state.todo);
 
   const dispatch = useDispatch();
-  const goPrevMonth = () => {
+  const goPrevMonth = useCallback(() => {
     dispatch(prevMonth());
-  };
-  const goToday = () => {
+  }, [dispatch]);
+  const goToday = useCallback(() => {
     dispatch(thisMonth());
-  };
-  const goNextMonth = () => {
+  }, [dispatch]);
+  const goNextMonth = useCallback(() => {
     dispatch(nextMonth());
-  };
+  }, [dispatch]);
 
-  const days = getDays(visibleDate);
+  const days = useMemo(() => getDays(visibleDate), [visibleDate]);
 
-  const onDateClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const {
-      currentTarget: { id },
-    } = event;
-    dispatch(changeDate(parseInt(id)));
-  };
+  const onDateClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      const {
+        currentTarget: { id },
+      } = event;
+      dispatch(changeDate(parseInt(id)));
+    },
+    [dispatch]
+  );
 
   return (
     <Box>

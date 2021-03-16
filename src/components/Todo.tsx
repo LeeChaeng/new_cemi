@@ -5,7 +5,7 @@ import { delTodo, toggleTodo } from "../store/modules/todo";
 
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { switchModal, targetTodo } from "../store/modules/modal";
+import { targetTodo } from "../store/modules/modal";
 
 type TodoProps = {
   id: string;
@@ -39,7 +39,7 @@ const Todo = ({ id, text, deadline, done, dateTime }: TodoProps) => {
           </div>
         </div>
       ) : (
-        <div onClick={todoToggle}>
+        <div>
           <Color color="#e3535a" />
           <div>
             <span>{text}</span>

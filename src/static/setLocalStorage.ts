@@ -1,5 +1,3 @@
-import { text } from "@fortawesome/fontawesome-svg-core";
-import { useDebugValue } from "react";
 import { TodoType } from "./getTodos";
 
 export const addLocalStorage = (
